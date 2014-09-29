@@ -16,7 +16,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
-app.use(express.debugger('dev'));
+app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -31,12 +31,12 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.debug('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
 */
 /*
 if( process.argv.length < 3 ) {
-	console.debug(
+	console.log(
 		'Usage: \n' +
 		'node stream-server.js <secret> [<stream-port> <websocket-port>]'
 	);
@@ -53,7 +53,7 @@ var STREAM_SECRET = 'jorge'/*process.argv[2] || 'jorge'*/,
 	height = 240;*/
 
 // Websocket Server
-/*
+
 var socketServer = new (require('ws').Server)({port: WEBSOCKET_PORT});
 socketServer.on('connection', function(socket) {
 	// Send magic bytes and video size to the newly connected socket
@@ -64,10 +64,10 @@ socketServer.on('connection', function(socket) {
 	streamHeader.writeUInt16BE(height, 6);
 	socket.send(streamHeader, {binary:true});
 
-	console.debug( 'New WebSocket Connection ('+socketServer.clients.length+' total)' );
+	console.log( 'New WebSocket Connection ('+socketServer.clients.length+' total)' );
 	
 	socket.on('close', function(code, message){
-		console.debug( 'Disconnected WebSocket ('+socketServer.clients.length+' total)' );
+		console.log( 'Disconnected WebSocket ('+socketServer.clients.length+' total)' );
 	});
 });
 
@@ -77,11 +77,11 @@ socketServer.broadcast = function(data, opts) {
 			this.clients[i].send(data, opts);
 		}
 		else {
-			console.debug( 'Error: Client ('+i+') not connected.' );
+			console.log( 'Error: Client ('+i+') not connected.' );
 		}
 	}
 };
-*/
+
 
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
@@ -90,7 +90,7 @@ var streamServer = require('http').createServer( function(request, response) {
 	height = (params[2] || 240)|0;
 
 	if( params[0] == STREAM_SECRET ) {
-		console.debug(
+		console.log(
 			'Stream Connected: ' + request.socket.remoteAddress + 
 			':' + request.socket.remotePort + ' size: ' + width + 'x' + height
 		);
@@ -99,7 +99,7 @@ var streamServer = require('http').createServer( function(request, response) {
 		});
 	}
 	else {
-		console.debug(
+		console.log(
 			'Failed Stream Connection: '+ request.socket.remoteAddress + 
 			request.socket.remotePort + ' - wrong secret.'
 		);
@@ -107,5 +107,5 @@ var streamServer = require('http').createServer( function(request, response) {
 	}
 }).listen(STREAM_PORT);
 
-//console.debug('Listening for MPEG Stream on http://10.0.1.77:'+STREAM_PORT+'/<secret>/<width>/<height>');
-//console.debug('Awaiting WebSocket connections on ws://10.0.1.77:'+WEBSOCKET_PORT+'/');
+//console.log('Listening for MPEG Stream on http://10.0.1.77:'+STREAM_PORT+'/<secret>/<width>/<height>');
+//console.log('Awaiting WebSocket connections on ws://10.0.1.77:'+WEBSOCKET_PORT+'/');
