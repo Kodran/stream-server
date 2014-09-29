@@ -105,7 +105,7 @@ var streamServer = require('http').createServer( function(request, response) {
 		);
 		response.end();
 	}
-}).listen(process.env.PORT || 8084);
+}).listen(process.env.PORT || 8082);
 
 //console.debug('node app connected...');
 //console.log('Listening for MPEG Stream on http://10.0.1.77:'+STREAM_PORT+'/<secret>/<width>/<height>');
