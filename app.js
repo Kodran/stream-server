@@ -53,6 +53,7 @@ var STREAM_SECRET = process.argv[2] || 'jorge',
 var width = 640,
 	height = 480;
 // Websocket Server
+/*
 var socketServer = new (require('ws').Server)({port: WEBSOCKET_PORT});
 socketServer.on('connection', function(socket) {
 	// Send magic bytes and video size to the newly connected socket
@@ -79,7 +80,7 @@ socketServer.broadcast = function(data, opts) {
 			console.log( 'Error: Client ('+i+') not connected.' );
 		}
 	}
-};
+};*/
 
 
 // HTTP Server to accept incomming MPEG Stream
