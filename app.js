@@ -84,6 +84,16 @@ socketServer.broadcast = function(data, opts) {
 };
 */
 
+var WebSocketServer = require('ws').Server
+, wss = new WebSocketServer({port: process.env.PORT || 8082});
+wss.on('connection', function(ws) {
+  ws.on('message', function(message) {
+      console.log('received: %s', message);
+  });
+  ws.send('something');
+});
+
+
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
 	var params = request.url.substr(1).split('/');
