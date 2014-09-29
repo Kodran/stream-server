@@ -85,7 +85,7 @@ socketServer.broadcast = function(data, opts) {
 */
 
 var WebSocketServer = require('ws').Server
-, wss = new WebSocketServer({port: process.env.PORT || 8082});
+, wss = new WebSocketServer({port: WEBSOCKET_PORT});
 wss.on('connection', function(ws) {
   ws.on('message', function(message) {
       console.log('received: %s', message);
