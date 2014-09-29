@@ -36,7 +36,7 @@ socketServer.on('connection', function(socket) {
 
 socketServer.broadcast = function(data, opts) {
 	for( var i in this.clients ) {
-		if (this.clients[i].readyState == 1) {
+		if (this.clients[i].readyState === 1) {
 			this.clients[i].send(data, opts);
 		}
 		else {
@@ -49,23 +49,17 @@ socketServer.broadcast = function(data, opts) {
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
 	var params = request.url.substr(1).split('/');
-	width = (params[1] || 320)|0;
-	height = (params[2] || 240)|0;
+	width = (params[1] || 320)	|| 0;
+	height = (params[2] || 240)	|| 0;
 
-	if( params[0] == STREAM_SECRET ) {
-		console.log(
-			'Stream Connected: ' + request.socket.remoteAddress + 
-			':' + request.socket.remotePort + ' size: ' + width + 'x' + height
-		);
+	if( params[0] === STREAM_SECRET ) {
+		console.log('Stream Connected: ' + request.socket.remoteAddress + ':' + request.socket.remotePort + ' size: ' + width + 'x' + height);
 		request.on('data', function(data){
 			socketServer.broadcast(data, {binary:true});
 		});
 	}
 	else {
-		console.log(
-			'Failed Stream Connection: '+ request.socket.remoteAddress + 
-			request.socket.remotePort + ' - wrong secret.'
-		);
+		console.log('Failed Stream Connection: '+ request.socket.remoteAddress + request.socket.remotePort + ' - wrong secret.');
 		response.end();
 	}
 }).listen(STREAM_PORT);
