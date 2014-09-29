@@ -54,7 +54,7 @@ var STREAM_SECRET = process.argv[2] || 'jorge',
 
 // Websocket Server
 
-var socketServer = new (require('ws').Server)({port: 8084});
+var socketServer = new (require('ws').Server)({port: process.env.PORT || 8084});
 socketServer.on('connection', function(socket) {
 	// Send magic bytes and video size to the newly connected socket
 	// struct { char magic[4]; unsigned short width, height;}
