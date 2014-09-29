@@ -53,7 +53,7 @@ var STREAM_SECRET = process.argv[2] || 'jorge',
 	height = 240;*/
 
 // Websocket Server
-/*
+
 var socketServer = new (require('ws').Server)({port: WEBSOCKET_PORT});
 socketServer.on('connection', function(socket) {
 	// Send magic bytes and video size to the newly connected socket
@@ -81,7 +81,7 @@ socketServer.broadcast = function(data, opts) {
 		}
 	}
 };
-*/
+
 
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
