@@ -34,15 +34,16 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 */
-
+/*
 if( process.argv.length < 3 ) {
 	console.log(
 		'Usage: \n' +
 		'node stream-server.js <secret> [<stream-port> <websocket-port>]'
 	);
 	process.exit();
-}
-
+}*/
+var width = 640,
+	height = 480;
 var STREAM_SECRET = process.argv[2] || 'jorge',
 	STREAM_PORT = process.env.PORT || 8082,
 	WEBSOCKET_PORT = process.env.PORT || 8084,
@@ -50,8 +51,7 @@ var STREAM_SECRET = process.argv[2] || 'jorge',
 
 /*var width = 320,
 	height = 240;*/
-var width = 640,
-	height = 480;
+
 // Websocket Server
 /*
 var socketServer = new (require('ws').Server)({port: WEBSOCKET_PORT});
