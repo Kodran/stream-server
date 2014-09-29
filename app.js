@@ -44,7 +44,7 @@ if( process.argv.length < 3 ) {
 }*/
 var width = 640,
 	height = 480;
-var STREAM_SECRET = 'jorge'/*process.argv[2] || 'jorge'*/,
+var STREAM_SECRET = process.argv[2] || 'jorge',
 	STREAM_PORT = process.env.PORT || 8082,
 	WEBSOCKET_PORT = process.env.PORT || 8084,
 	STREAM_MAGIC_BYTES = 'jsmp'; // Must be 4 bytes
