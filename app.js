@@ -82,14 +82,14 @@ socketServer.broadcast = function(data, opts) {
 	}
 };
 
-/*
+
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
 	var params = request.url.substr(1).split('/');
 	width = (params[1] || 320)|0;
 	height = (params[2] || 240)|0;
 
-	if( params[0] == STREAM_SECRET ) {
+	if( params[0] == 'jorge' ) {
 		console.log(
 			'Stream Connected: ' + request.socket.remoteAddress + 
 			':' + request.socket.remotePort + ' size: ' + width + 'x' + height
@@ -106,7 +106,7 @@ var streamServer = require('http').createServer( function(request, response) {
 		response.end();
 	}
 }).listen(process.env.PORT || 8082);
-*/
+
 //console.debug('node app connected...');
 //console.log('Listening for MPEG Stream on http://10.0.1.77:'+STREAM_PORT+'/<secret>/<width>/<height>');
 //console.log('Awaiting WebSocket connections on ws://10.0.1.77:'+WEBSOCKET_PORT+'/');
