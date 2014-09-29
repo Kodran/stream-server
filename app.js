@@ -54,13 +54,12 @@ var STREAM_SECRET = process.argv[2] || 'jorge',
 
 // Websocket Server
 
-//var socketServer = new (require('ws').Server)({port: WEBSOCKET_PORT});
-/*var WebSocketServer = require('ws').Server, wss = new WebSocketServer({port: process.env.WEBSOCKET_PORT});
-	wss.on('connection', function(socket) {
+var socketServer = new (require('ws').Server)({port: 8084});
+socketServer.on('connection', function(socket) {
 	// Send magic bytes and video size to the newly connected socket
 	// struct { char magic[4]; unsigned short width, height;}
 	var streamHeader = new Buffer(8);
-	streamHeader.write(STREAM_MAGIC_BYTES);
+	streamHeader.write('jsmp');
 	streamHeader.writeUInt16BE(width, 4);
 	streamHeader.writeUInt16BE(height, 6);
 	socket.send(streamHeader, {binary:true});
@@ -82,17 +81,17 @@ socketServer.broadcast = function(data, opts) {
 		}
 	}
 };
-*/
 
+/*
 var WebSocketServer = require('ws').Server
-, wss = new WebSocketServer({port: 8080});
+, wss = new WebSocketServer({port: 8084});
 wss.on('connection', function(ws) {
   ws.on('message', function(message) {
       console.log('received: %s', message);
   });
   ws.send('something');
 });
-
+*/
 
 // HTTP Server to accept incomming MPEG Stream
 var streamServer = require('http').createServer( function(request, response) {
