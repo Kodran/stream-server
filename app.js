@@ -113,7 +113,6 @@ var streamServer = require('http').createServer( function(request, response) {
 
 
 
-
 if( process.argv.length < 3 ) {
 	console.log(
 		'Usage: \n' +
@@ -127,10 +126,10 @@ var STREAM_SECRET = process.argv[2] || 'jorge',
 	WEBSOCKET_PORT = process.argv[4] || 8084,
 	STREAM_MAGIC_BYTES = 'jsmp'; // Must be 4 bytes
 
-/*var width = 320,
-	height = 240;*/
+var width = 320,
+	height = 240;/*
 var width = 640,
-	height = 480;
+	height = 480;*/
 // Websocket Server
 var socketServer = new (require('ws').Server)({port: WEBSOCKET_PORT});
 socketServer.on('connection', function(socket) {
