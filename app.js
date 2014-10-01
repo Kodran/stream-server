@@ -111,7 +111,7 @@ var streamServer = require('http').createServer( function(request, response) {
 //console.log('Listening for MPEG Stream on http://10.0.1.77:'+STREAM_PORT+'/<secret>/<width>/<height>');
 //console.log('Awaiting WebSocket connections on ws://10.0.1.77:'+WEBSOCKET_PORT+'/');
 
-
+//http://phoboslab.org/log/2013/09/html5-live-video-streaming-via-websockets
 
 if( process.argv.length < 3 ) {
 	console.log(
